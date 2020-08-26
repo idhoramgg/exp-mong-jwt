@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./config/db');
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const userRouter = require('./routes/Users')
 const movieRouter = require('./routes/Movies')
@@ -9,7 +10,7 @@ const historyRouter = require('./routes/HistoryWatch')
 
 const app = express()
 
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
