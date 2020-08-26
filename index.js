@@ -10,6 +10,8 @@ const historyRouter = require('./routes/HistoryWatch')
 
 const app = express()
 
+const API_PORT = 8000 || process.env.PORT;
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -18,16 +20,16 @@ app.get('/', (req, res) => {
     res.send('welcome')
 })
 
-app.use('/', userRouter)
-app.use('/', movieRouter)
-app.use('/', subsRouter)
-app.use('/', historyRouter)
+app.use('/api', userRouter)
+app.use('/api', movieRouter)
+app.use('/api', subsRouter)
+app.use('/api', historyRouter)
 
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', () => console.log('we re connected'));
 
-app.listen(8000, ()=> {
-    console.log('connected')
+app.listen(API_PORT, ()=> {
+    console.log(`connected, port ${API_PORT}`)
 })
 
 // test
